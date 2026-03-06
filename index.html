@@ -198,7 +198,8 @@
     ================================================================ */
     .hero {
       position: relative; min-height: 100svh;
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex; align-items: center; justify-content: flex-start;
+      gap: max(4rem, 6vw);
       padding-inline: 4rem; overflow: hidden;
     }
     #hero-canvas { position: absolute; inset: 0; z-index: 0; }
@@ -585,11 +586,12 @@
        RESPONSIVE
     ================================================================ */
     @media (max-width: 1100px) {
-      .hp-outer { width: 300px; }
-      .hp-orbit-wrap { width: 390px; height: 390px; }
+      .hp-outer { width: 360px; }
+      .hp-orbit-wrap { width: 470px; height: 470px; }
+      .hp-ring-outer { width: 520px; height: 520px; }
       @keyframes hp-orbit {
-        from { transform: rotate(0deg)   translateX(188px) rotate(0deg); }
-        to   { transform: rotate(360deg) translateX(188px) rotate(-360deg); }
+        from { transform: rotate(0deg)   translateX(225px) rotate(0deg); }
+        to   { transform: rotate(360deg) translateX(225px) rotate(-360deg); }
       }
 
       .about-grid          { grid-template-columns: 1fr 1fr; gap: 4rem; }
@@ -704,29 +706,17 @@
        HERO PHOTO — hexagon portrait
     ================================================================ */
 
-    /* Entrance animation */
+    /* — Keyframes — */
     @keyframes hero-photo-in {
       from { opacity: 0; transform: translateY(28px) scale(.96); }
       to   { opacity: 1; transform: translateY(0)    scale(1); }
     }
-
-    .hero-photo-col {
-      position: relative; z-index: 2;
-      flex: 0 0 auto;
-      display: flex; align-items: center; justify-content: center;
-      padding-left: 3rem;
-      opacity: 0;
-      animation: hero-photo-in 1.2s 1.8s var(--ease-expo) forwards;
-    }
-
-    /* Outer container: handles drop-shadow glow cycling purple → cyan */
-    .hp-outer {
-      position: relative;
-      width: 380px;
-      animation: hp-glow-cycle 3s linear infinite;
+    @keyframes hp-float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-15px); }
     }
     @keyframes hp-glow-cycle {
-      0%,100% {
+      0%, 100% {
         filter: drop-shadow(0 0 14px rgba(124,58,237,.9))
                 drop-shadow(0 0 36px rgba(124,58,237,.35));
       }
@@ -735,19 +725,67 @@
                 drop-shadow(0 0 36px rgba(6,182,212,.35));
       }
     }
-    .hp-outer:hover { animation-duration: 1s; } /* pulses faster on hover */
+    @keyframes hp-border-cycle {
+      0%, 100% { background: #7C3AED; }
+      50%      { background: #06B6D4; }
+    }
+    @keyframes hp-ring-spin { to { rotate: 360deg; } }
+    @keyframes hp-scan {
+      0%   { top: -3px;             opacity: 0; }
+      5%   { top: -3px;             opacity: 1; }
+      62%  { top: calc(100% + 3px); opacity: 1; }
+      63%  { opacity: 0; }
+      100% { top: -3px;             opacity: 0; }
+    }
+    @keyframes hp-glitch {
+      0%, 87%, 100% { transform: none;                       filter: none; }
+      88% { transform: translate(-5px, 1px) skewX(-2deg);    filter: hue-rotate(20deg) saturate(2.5); }
+      89% { transform: translate(5px, -1px) skewX(1deg);     filter: hue-rotate(-20deg) saturate(2.5); }
+      90% { transform: translate(-3px, 0);                   filter: brightness(1.5); }
+      91% { transform: none;                                 filter: none; }
+    }
+    @keyframes hp-orbit {
+      from { transform: rotate(0deg)   translateX(300px) rotate(0deg); }
+      to   { transform: rotate(360deg) translateX(300px) rotate(-360deg); }
+    }
 
-    /* Animated hex border layer (4px behind, same hex clip) */
+    /* — Layout — */
+    .hero-photo-col {
+      position: relative; z-index: 2;
+      flex: 0 0 auto;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0;
+      animation: hero-photo-in 1.2s 1.8s var(--ease-expo) forwards;
+    }
+
+    /* Float wrapper — separated so glow and float animations don't share duration */
+    .hp-float-wrap { animation: hp-float 4s ease-in-out infinite; }
+
+    /* Outer container: glow cycling purple → cyan */
+    .hp-outer {
+      position: relative;
+      width: 480px;
+      animation: hp-glow-cycle 3s linear infinite;
+    }
+    .hp-outer:hover { animation-duration: 1s; }
+
+    /* Outer dashed ring — slowly spins 360° every 20s */
+    .hp-ring-outer {
+      position: absolute; z-index: 0; pointer-events: none;
+      width: 680px; height: 680px;
+      top: 50%; left: 50%; translate: -50% -50%;
+      border: 1.5px dashed rgba(124,58,237,.3);
+      border-radius: 50%;
+      animation: hp-ring-spin 20s linear infinite;
+    }
+
+    /* Hex border layer — animates purple ↔ cyan, 4px thick */
     .hp-border {
       position: absolute; inset: -4px; z-index: 0;
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       background: #7C3AED;
       animation: hp-border-cycle 3s linear infinite;
       pointer-events: none;
-    }
-    @keyframes hp-border-cycle {
-      0%,100% { background: #7C3AED; }
-      50%     { background: #06B6D4; }
     }
     .hp-outer:hover .hp-border { animation-duration: 1s; }
 
@@ -759,6 +797,7 @@
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       overflow: hidden;
       background: var(--navy-l2);
+      animation: hp-glitch 5s linear infinite;
     }
     .hp-clip img {
       width: 100%; height: 100%;
@@ -771,7 +810,7 @@
       filter: brightness(1.15);
     }
 
-    /* Scanline / CRT overlay on photo */
+    /* CRT scanline static overlay */
     .hp-scanline {
       position: absolute; inset: 0; z-index: 2; pointer-events: none;
       background: repeating-linear-gradient(
@@ -781,21 +820,38 @@
       );
     }
 
-    /* Corner bracket decorations (targeting crosshairs) */
+    /* Data scan sweep — bright line top → bottom every 3.5s */
+    .hp-scan-line {
+      position: absolute; left: 0; right: 0; height: 2px;
+      z-index: 3; pointer-events: none;
+      background: linear-gradient(90deg,
+        transparent 0%, rgba(6,182,212,.6) 20%,
+        rgba(255,255,255,.85) 50%, rgba(6,182,212,.6) 80%, transparent 100%);
+      box-shadow: 0 0 8px rgba(6,182,212,.7), 0 0 22px rgba(6,182,212,.35);
+      animation: hp-scan 3.5s linear infinite;
+    }
+
+    /* Corner brackets — grow + recolor on hover */
     .hp-bracket {
       position: absolute; width: 24px; height: 24px;
       border-color: var(--accent); border-style: solid;
       pointer-events: none; z-index: 3; opacity: .8;
+      transition: width .35s var(--ease), height .35s var(--ease),
+                  border-color .35s, opacity .3s;
     }
-    .hp-bracket-tl { top: -10px;  left: -10px;  border-width: 2px 0 0 2px; }
-    .hp-bracket-tr { top: -10px;  right: -10px; border-width: 2px 2px 0 0; }
-    .hp-bracket-bl { bottom: -10px; left: -10px;  border-width: 0 0 2px 2px; }
-    .hp-bracket-br { bottom: -10px; right: -10px; border-width: 0 2px 2px 0; }
+    .hp-bracket-tl { top: -10px;    left: -10px;   border-width: 2px 0 0 2px; }
+    .hp-bracket-tr { top: -10px;    right: -10px;  border-width: 2px 2px 0 0; }
+    .hp-bracket-bl { bottom: -10px; left: -10px;   border-width: 0 0 2px 2px; }
+    .hp-bracket-br { bottom: -10px; right: -10px;  border-width: 0 2px 2px 0; }
+    .hp-outer:hover .hp-bracket {
+      width: 36px; height: 36px;
+      opacity: 1; border-color: var(--violet-light);
+    }
 
     /* Orbiting glow dots */
     .hp-orbit-wrap {
       position: absolute; z-index: 0; pointer-events: none;
-      width: 490px; height: 490px;
+      width: 620px; height: 620px;
       top: 50%; left: 50%; translate: -50% -50%;
     }
     .hp-dot {
@@ -817,10 +873,6 @@
       background: var(--violet-light);
       box-shadow: 0 0 5px var(--violet-light), 0 0 12px var(--violet-light);
       animation: hp-orbit 5s linear infinite -3.33s;
-    }
-    @keyframes hp-orbit {
-      from { transform: rotate(0deg)   translateX(237px) rotate(0deg); }
-      to   { transform: rotate(360deg) translateX(237px) rotate(-360deg); }
     }
   </style>
 </head>
@@ -917,25 +969,30 @@
 
     <!-- Profile photo — hexagon portrait -->
     <div class="hero-photo-col" aria-label="Kelvin Nguyen profile photo">
-      <div class="hp-outer">
-        <!-- Orbiting glow dots -->
-        <div class="hp-orbit-wrap" aria-hidden="true">
-          <span class="hp-dot hp-dot-1"></span>
-          <span class="hp-dot hp-dot-2"></span>
-          <span class="hp-dot hp-dot-3"></span>
+      <div class="hp-float-wrap">
+        <div class="hp-outer">
+          <!-- Outer dashed spinning ring -->
+          <div class="hp-ring-outer" aria-hidden="true"></div>
+          <!-- Orbiting glow dots -->
+          <div class="hp-orbit-wrap" aria-hidden="true">
+            <span class="hp-dot hp-dot-1"></span>
+            <span class="hp-dot hp-dot-2"></span>
+            <span class="hp-dot hp-dot-3"></span>
+          </div>
+          <!-- Animated hex border layer -->
+          <div class="hp-border" aria-hidden="true"></div>
+          <!-- Image with scanline + data scan sweep -->
+          <div class="hp-clip">
+            <img src="Avartar.jpg" alt="Kelvin Nguyen — Web3 BD Executive" />
+            <div class="hp-scanline"  aria-hidden="true"></div>
+            <div class="hp-scan-line" aria-hidden="true"></div>
+          </div>
+          <!-- Corner bracket decorations -->
+          <div class="hp-bracket hp-bracket-tl" aria-hidden="true"></div>
+          <div class="hp-bracket hp-bracket-tr" aria-hidden="true"></div>
+          <div class="hp-bracket hp-bracket-bl" aria-hidden="true"></div>
+          <div class="hp-bracket hp-bracket-br" aria-hidden="true"></div>
         </div>
-        <!-- Animated border layer -->
-        <div class="hp-border" aria-hidden="true"></div>
-        <!-- Image with scanline overlay -->
-        <div class="hp-clip">
-          <img src="Avartar.jpg" alt="Kelvin Nguyen — Web3 BD Executive" />
-          <div class="hp-scanline" aria-hidden="true"></div>
-        </div>
-        <!-- Corner bracket decorations -->
-        <div class="hp-bracket hp-bracket-tl" aria-hidden="true"></div>
-        <div class="hp-bracket hp-bracket-tr" aria-hidden="true"></div>
-        <div class="hp-bracket hp-bracket-bl" aria-hidden="true"></div>
-        <div class="hp-bracket hp-bracket-br" aria-hidden="true"></div>
       </div>
     </div>
 
