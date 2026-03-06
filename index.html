@@ -8,7 +8,7 @@
   <!-- Google Fonts: Playfair Display + DM Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -24,20 +24,20 @@
       --navy-l2:       #121a30;
       --navy-l3:       #1a253e;
 
-      --violet:        #5b21ff;      /* deeper electric blue-violet */
-      --violet-mid:    #7c5cf6;
-      --violet-light:  #b8a0ff;
+      --violet:        #7C3AED;
+      --violet-mid:    #9F7AEA;
+      --violet-light:  #C4B5FD;
 
-      --accent:        #00d4ff;      /* crypto cyan — replaces pink */
+      --accent:        #06B6D4;
       --accent-warm:   #f59e0b;
 
-      --off-white:     #eef0f5;
-      --off-white-60:  rgba(238, 240, 245, 0.60);
-      --off-white-30:  rgba(238, 240, 245, 0.30);
-      --off-white-10:  rgba(238, 240, 245, 0.08);
+      --off-white:     #E2E8F0;
+      --off-white-60:  rgba(226, 232, 240, 0.60);
+      --off-white-30:  rgba(226, 232, 240, 0.30);
+      --off-white-10:  rgba(226, 232, 240, 0.08);
 
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body:    'DM Sans', system-ui, sans-serif;
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body:    'Inter', system-ui, sans-serif;
 
       --ease:      cubic-bezier(0.25, 0.46, 0.45, 0.94);
       --ease-expo: cubic-bezier(0.16, 1.00, 0.30, 1.00);
@@ -113,7 +113,7 @@
     }
     .nav-logo {
       font-family: var(--font-display);
-      font-size: 1.5rem; font-weight: 900; letter-spacing: -.02em;
+      font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em;
     }
     .nav-logo em { font-style: italic; color: var(--accent); }
 
@@ -129,7 +129,7 @@
       width: 0; height: 1px; background: var(--accent);
       transition: width .35s var(--ease);
     }
-    .nav-list a:hover, .nav-list a.active { color: var(--off-white); }
+    .nav-list a:hover, .nav-list a.active { color: var(--off-white); text-shadow: 0 0 14px rgba(6,182,212,.65); }
     .nav-list a:hover::after, .nav-list a.active::after { width: 100%; }
 
     .nav-burger {
@@ -165,7 +165,7 @@
       font-size: clamp(2.5rem, 4.5vw, 4rem);
       font-weight: 700; line-height: 1.08; letter-spacing: -.03em;
     }
-    .section-title em { font-style: italic; color: var(--violet-mid); }
+    .section-title em { font-style: normal; font-weight: 700; color: var(--accent); }
 
     .btn {
       display: inline-flex; align-items: center; gap: .6rem;
@@ -183,13 +183,13 @@
       transition: transform .45s var(--ease-expo);
     }
     .btn-primary:hover::before { transform: translateX(0); }
-    .btn-primary:hover { box-shadow: 0 14px 44px rgba(0,212,255,.22); color: var(--navy); }
+    .btn-primary:hover { box-shadow: 0 0 28px rgba(6,182,212,.45), 0 14px 44px rgba(6,182,212,.22); color: var(--navy); }
     .btn-outline {
       background: transparent; color: var(--off-white);
       border: 1.5px solid var(--off-white-30);
       transition: border-color .3s, background .3s;
     }
-    .btn-outline:hover { border-color: var(--accent); background: rgba(0,212,255,.06); color: var(--accent); }
+    .btn-outline:hover { border-color: var(--accent); background: rgba(6,182,212,.06); color: var(--accent); box-shadow: 0 0 20px rgba(124,58,237,.3), inset 0 0 20px rgba(6,182,212,.04); }
 
 
     /* ================================================================
@@ -242,17 +242,18 @@
     .hero-name {
       font-family: var(--font-display);
       font-size: clamp(4rem, 10vw, 9.5rem);
-      font-weight: 900; line-height: .92;
+      font-weight: 700; line-height: .92;
       letter-spacing: -.04em; margin-bottom: 2rem;
+      animation: name-glitch 7s infinite 2.5s;
     }
     .name-line  { display: block; overflow: hidden; }
     .name-inner { display: block; transform: translateY(110%); }
-    .hero-name em    { font-style: italic; color: var(--violet-mid); }
+    .hero-name em    { font-style: normal; font-weight: 700; color: var(--accent); }
     .hero-name .ghost {
       -webkit-text-stroke: 2px var(--violet-mid); color: transparent;
     }
 
-    .hero-sub  { font-family: var(--font-display); font-size: clamp(1.1rem,2.2vw,1.75rem); font-weight: 400; font-style: italic; color: var(--off-white-60); margin-bottom: 1.5rem; opacity: 0; }
+    .hero-sub  { font-family: var(--font-display); font-size: clamp(1rem,2vw,1.5rem); font-weight: 600; letter-spacing: -.01em; color: var(--off-white-60); margin-bottom: 1.5rem; opacity: 0; }
     .hero-bio  { font-size: 1rem; color: var(--off-white-60); max-width: 520px; line-height: 1.9; margin-bottom: 3rem; opacity: 0; }
     .hero-btns { display: flex; flex-wrap: wrap; gap: 1rem; opacity: 0; }
 
@@ -261,7 +262,7 @@
       display: flex; flex-direction: column; gap: 1.75rem;
       text-align: right; opacity: 0;
     }
-    .stat-num   { font-family: var(--font-display); font-size: 2.4rem; font-weight: 900; line-height: 1; }
+    .stat-num   { font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; line-height: 1; }
     .stat-num em { font-style: italic; color: var(--accent); }
     .stat-label { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--off-white-60); }
 
@@ -332,7 +333,7 @@
       border-radius: 8px; padding: 1.1rem 1.5rem;
       backdrop-filter: blur(12px);
     }
-    .badge-num   { font-family: var(--font-display); font-size: 2.2rem; font-weight: 900; color: var(--accent); line-height: 1; }
+    .badge-num   { font-family: var(--font-display); font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; }
     .badge-label { font-size: .7rem; color: var(--off-white-60); margin-top: .2rem; }
 
     .about-bio { font-size: 1rem; color: var(--off-white-60); line-height: 1.9; margin-top: 1.5rem; }
@@ -377,7 +378,7 @@
 
     .sk-num {
       position: absolute; top: 1.25rem; right: 1.5rem;
-      font-family: var(--font-display); font-size: 3.6rem; font-weight: 900;
+      font-family: var(--font-display); font-size: 3.6rem; font-weight: 700;
       color: var(--off-white-10); line-height: 1; letter-spacing: -.04em;
       transition: color .4s;
     }
@@ -573,7 +574,7 @@
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 1rem;
     }
-    .footer-logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 900; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; }
     .footer-logo em { font-style: italic; color: var(--accent); }
     footer p { font-size: .8rem; color: var(--off-white-60); }
     .footer-top { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--violet-mid); transition: color .3s; }
@@ -627,6 +628,67 @@
       .cursor-dot, .cursor-ring { display: none; }
       body { cursor: auto; }
     }
+
+
+    /* ================================================================
+       GLITCH — hero name
+    ================================================================ */
+    @keyframes name-glitch {
+      0%,  85%, 100% { transform: none; filter: none; }
+      86% {
+        transform: translate(-5px, 2px) skewX(-2deg);
+        filter: drop-shadow(-6px 0 #06B6D4) drop-shadow(6px 0 #7C3AED);
+      }
+      87% {
+        transform: translate(5px, -2px) skewX(2deg);
+        filter: drop-shadow(6px 0 #06B6D4) drop-shadow(-6px 0 #7C3AED);
+      }
+      88% {
+        transform: translate(-3px, 1px) skewX(-1deg);
+        filter: drop-shadow(-3px 0 #7C3AED);
+      }
+      89% {
+        transform: translate(2px, -1px);
+        filter: drop-shadow(2px 0 #06B6D4);
+      }
+      90% { transform: none; filter: none; }
+    }
+
+    /* ================================================================
+       SCANLINE OVERLAY
+    ================================================================ */
+    .hero-scanline {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent, transparent 3px,
+        rgba(0, 0, 0, 0.055) 3px, rgba(0, 0, 0, 0.055) 4px
+      );
+    }
+
+    /* ================================================================
+       TYPEWRITER CURSOR
+    ================================================================ */
+    .typer-cursor {
+      display: inline-block; width: 2px; height: .8em;
+      background: var(--accent); margin-left: 3px;
+      vertical-align: middle;
+      animation: blink-cursor .75s step-end infinite;
+    }
+    @keyframes blink-cursor { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ================================================================
+       GRID OVERLAY — hero section
+    ================================================================ */
+    .hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--off-white-10) 1px, transparent 1px),
+        linear-gradient(90deg, var(--off-white-10) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 70%);
+    }
   </style>
 </head>
 <body>
@@ -662,6 +724,7 @@
   ============================================================ -->
   <section id="hero" class="hero" aria-labelledby="hero-heading">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="hero-scanline" aria-hidden="true"></div>
     <div class="hero-glow"  aria-hidden="true"></div>
     <div class="blob blob-1" aria-hidden="true"></div>
     <div class="blob blob-2" aria-hidden="true"></div>
@@ -672,7 +735,7 @@
     <div class="hero-content">
       <p class="hero-eyebrow" aria-label="Open to new opportunities">
         <span class="eyebrow-dot" aria-hidden="true"></span>
-        Open to new BD opportunities in Web3
+        Actively closing the next Web3 growth deal
       </p>
 
       <h1 class="hero-name" id="hero-heading" aria-label="Nguyen Ba Kien — Kelvin">
@@ -681,12 +744,12 @@
         <span class="name-line"><span class="name-inner"><em>Kien.</em></span></span>
       </h1>
 
-      <p class="hero-sub">Business Development Executive · Web3 &amp; Crypto Growth</p>
+      <p class="hero-sub">The BD Lead Who Turns Networks Into Revenue.</p>
 
       <p class="hero-bio">
-        Combining traditional finance experience with Web3-native growth tactics —
-        building KOL networks, driving exchange volume, and turning partnerships
-        into measurable results across SEA, EU, and LATAM markets.
+        I don't just network — I build revenue engines. 4,000+ KOLs. $2M+ in volume.
+        100K+ users onboarded. Three years of Web3 BD compressed into one repeatable
+        outcome: deals that close, numbers that hold.
       </p>
 
       <div class="hero-btns">
@@ -706,15 +769,15 @@
     <!-- Floating KPIs -->
     <aside class="hero-stats" aria-label="Key metrics">
       <div>
-        <p class="stat-num">4<em>K+</em></p>
+        <p class="stat-num" data-count="4" data-suffix="K+">4<em>K+</em></p>
         <p class="stat-label">KOL Network</p>
       </div>
       <div>
-        <p class="stat-num">$2<em>M+</em></p>
+        <p class="stat-num" data-prefix="$" data-count="2" data-suffix="M+">$2<em>M+</em></p>
         <p class="stat-label">Volume Driven</p>
       </div>
       <div>
-        <p class="stat-num">100<em>K+</em></p>
+        <p class="stat-num" data-count="100" data-suffix="K+">100<em>K+</em></p>
         <p class="stat-label">Users Acquired</p>
       </div>
     </aside>
@@ -751,28 +814,29 @@
         <div class="about-text" id="js-about-text">
           <p class="eyebrow">About Me</p>
           <h2 class="section-title" id="about-heading">
-            Growth is<br>my <em>game.</em>
+            Revenue is<br>my <em>language.</em>
           </h2>
           <p class="about-bio">
-            I'm a <strong>Business Development Executive</strong> with a background in investment consulting,
-            financial sales, and crypto exchange growth. I began my career advising retail and
-            institutional clients before moving into BD roles at crypto exchanges — focusing on
-            user acquisition, affiliate management, and OTC coordination.
+            I'm a <strong>Web3 BD Executive and KOL Network Architect</strong> who turns cold
+            connections into closed deals. Rooted in investment consulting and financial sales,
+            I carry a rare combination: the analytical precision of traditional finance and the
+            on-chain instincts of a crypto native — both of which matter when you're closing
+            six-figure exchange marketing packages.
           </p>
           <p class="about-bio">
-            I've built and leveraged a wide trading KOL network across Vietnam and global markets,
-            led community-based campaigns, and executed volume-driven strategies to onboard real users.
-            My strength lies in combining <strong>traditional finance experience</strong> with
-            <strong>Web3-native growth tactics</strong> and strong KOL partnerships to deliver
-            scalable, measurable results.
+            Since 2022 I've scaled a <strong>4,000+ KOL network</strong> across SEA, EU &amp;
+            LATAM, architected volume-based affiliate programs on CPA &amp; OTC structures,
+            and driven partnerships with MEXC, KuCoin, Bitget &amp; Bitunix. I operate across
+            <strong>DeFi, CEX growth, GameFi, and AI Agent verticals</strong> — wherever Web3
+            needs a BD lead who delivers verifiable results.
           </p>
           <div class="chips" aria-label="Traits and strengths">
-            <span class="chip">⚡ Deal Closer</span>
-            <span class="chip">⚡ Network Builder</span>
-            <span class="chip">⚡ Web3 Native</span>
-            <span class="chip">⚡ Data-Driven</span>
-            <span class="chip">⚡ Strategic Thinker</span>
-            <span class="chip">⚡ Community-Led</span>
+            <span class="chip">🚀 Deal Architect</span>
+            <span class="chip">🌐 KOL Network ×4K</span>
+            <span class="chip">⛓️ Web3 Native</span>
+            <span class="chip">📊 Volume-Driven</span>
+            <span class="chip">🎯 GTM Strategist</span>
+            <span class="chip">🤝 Community-Led</span>
           </div>
           <a href="mailto:nguyenbakienhumg@gmail.com" class="btn btn-primary" aria-label="Email Kelvin">
             <span>Get In Touch</span>
@@ -800,7 +864,8 @@
           <h2 class="section-title" id="skills-heading">Tools of my<br><em>trade.</em></h2>
         </div>
         <p class="skills-note">
-          A battle-tested skill set forged across forex, CEX growth, GameFi launches, and Web3 BD campaigns.
+          A battle-hardened toolkit refined across forex affiliate growth, CEX exchange BD, GameFi launches,
+          and multi-chain Web3 campaigns — with real numbers to back every claim.
         </p>
       </div>
 
@@ -810,7 +875,7 @@
           <span class="sk-num" aria-hidden="true">01</span>
           <div class="sk-icon" aria-hidden="true">🤝</div>
           <h3 class="sk-name">KOL Management</h3>
-          <p class="sk-desc">Strategic sourcing &amp; management of 4,000+ KOLs across SEA, EU, and LATAM for trading and Web3 projects.</p>
+          <p class="sk-desc">Sourced, vetted &amp; managed 4,000+ KOLs across Twitter/X, YouTube, Telegram &amp; Zalo — spanning SEA, EU, and LATAM. Expert in performance tiers, revenue-share structures, and campaign ROI tracking.</p>
           <div class="sk-track" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="95%">
             <div class="sk-fill"></div></div>
           <p class="sk-meta">Expert · 95%</p>
@@ -820,7 +885,7 @@
           <span class="sk-num" aria-hidden="true">02</span>
           <div class="sk-icon" aria-hidden="true">💼</div>
           <h3 class="sk-name">Business Development</h3>
-          <p class="sk-desc">End-to-end BD cycles: prospecting, pitching, deal structuring, and closing with exchanges, projects &amp; foundations.</p>
+          <p class="sk-desc">Full-cycle BD from cold outreach to signed deal — pitch deck creation, proposal writing, negotiation, and closing. Track record with MEXC, KuCoin, Bitget, Bitunix, and blockchain foundations.</p>
           <div class="sk-track" role="progressbar" aria-valuenow="92" aria-valuemin="0" aria-valuemax="100" aria-label="92%">
             <div class="sk-fill"></div></div>
           <p class="sk-meta">Expert · 92%</p>
@@ -830,7 +895,7 @@
           <span class="sk-num" aria-hidden="true">03</span>
           <div class="sk-icon" aria-hidden="true">📊</div>
           <h3 class="sk-name">Affiliate Strategy</h3>
-          <p class="sk-desc">Designing and executing volume-based affiliate programs with OTC, CPA, and referral KPI frameworks.</p>
+          <p class="sk-desc">Architected volume-based programs with CPA, revenue-share &amp; OTC deal structures. Built traceable pipelines from community sourcing to KPI reporting — driving $2M+ in verifiable trading volume.</p>
           <div class="sk-track" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="88%">
             <div class="sk-fill"></div></div>
           <p class="sk-meta">Advanced · 88%</p>
@@ -840,7 +905,7 @@
           <span class="sk-num" aria-hidden="true">04</span>
           <div class="sk-icon" aria-hidden="true">🌐</div>
           <h3 class="sk-name">Community Building</h3>
-          <p class="sk-desc">Growing and managing trading &amp; Web3 communities on Telegram, Zalo, and social platforms in local and global markets.</p>
+          <p class="sk-desc">Built high-retention trading &amp; Web3 communities on Telegram, Zalo, Discord &amp; X. Specializes in converting community engagement directly into measurable trading volume and product adoption.</p>
           <div class="sk-track" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" aria-label="85%">
             <div class="sk-fill"></div></div>
           <p class="sk-meta">Advanced · 85%</p>
@@ -850,7 +915,7 @@
           <span class="sk-num" aria-hidden="true">05</span>
           <div class="sk-icon" aria-hidden="true">🔍</div>
           <h3 class="sk-name">Market Research</h3>
-          <p class="sk-desc">CEX/DEX landscape analysis, competitor benchmarking, and project evaluation to inform go-to-market strategies.</p>
+          <p class="sk-desc">CEX/DEX landscape mapping, competitor benchmarking, on-chain data analysis via Dune Analytics &amp; DefiLlama, and project viability assessment — powering smarter go-to-market decisions.</p>
           <div class="sk-track" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" aria-label="82%">
             <div class="sk-fill"></div></div>
           <p class="sk-meta">Advanced · 82%</p>
@@ -860,7 +925,7 @@
           <span class="sk-num" aria-hidden="true">06</span>
           <div class="sk-icon" aria-hidden="true">⛓️</div>
           <h3 class="sk-name">Web3 Ecosystem</h3>
-          <p class="sk-desc">Deep familiarity with DeFi protocols, GameFi, AI Agents, crypto exchanges, and the evolving Web3 market dynamics.</p>
+          <p class="sk-desc">Practitioner-level knowledge across DeFi protocols, GameFi, NFT infrastructure, AI Agents &amp; CEX/DEX mechanics — enabling credible conversations with founders, funds, and market makers alike.</p>
           <div class="sk-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="80%">
             <div class="sk-fill"></div></div>
           <p class="sk-meta">Proficient · 80%</p>
@@ -897,7 +962,7 @@
               <span class="proj-stat-pill">TVL Growth</span>
             </div>
             <h3 class="proj-name">Spores Network</h3>
-            <p class="proj-desc">Closed marketing packages for multiple projects. Partnered with MEXC, KuCoin, Bitget, Bitunix, Amnis Finance &amp; more — executing exchange promotion strategies, driving trading volume, and building affiliate partnerships.</p>
+            <p class="proj-desc">Diverse Web3 projects needed exchange exposure but lacked the BD relationships to unlock it. Stepped in as deal architect — closed promotional packages with MEXC, KuCoin, Bitget &amp; Bitunix, built affiliate pipelines from scratch, and hosted ecosystem side events. <strong>Result:</strong> Sustained TVL growth and a growing roster of repeat clients.</p>
             <a href="#contact" class="proj-link">Learn More
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </a>
@@ -914,7 +979,7 @@
               <span class="proj-stat-pill">$50K+ Revenue</span>
             </div>
             <h3 class="proj-name">GameFi KOL Blitz</h3>
-            <p class="proj-desc">Led KOL &amp; affiliate campaigns for a Web3 GameFi project at SOVIC, delivering 100K+ users acquired and $50K+ in direct revenue — through coordinated go-to-market execution and media channel growth.</p>
+            <p class="proj-desc">A new GameFi title needed rapid user acquisition before its token launch window closed. Designed and executed a full KOL + affiliate blitz — recruited 50+ creators across Twitter/X &amp; YouTube, structured tiered revenue-share deals, and coordinated cross-channel content drops. <strong>Result:</strong> 100K+ users onboarded, $50K+ in direct revenue within a single campaign cycle.</p>
             <a href="#contact" class="proj-link">Learn More
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </a>
@@ -931,7 +996,7 @@
               <span class="proj-stat-pill">1,000+ Active Users</span>
             </div>
             <h3 class="proj-name">Newsun Volume Drive</h3>
-            <p class="proj-desc">Built partnerships with Vietnamese trading communities on Telegram &amp; Zalo for XM and Exness. Structured volume-based deals delivering 1,000+ active users and $2M+ in trading volume across multiple short-cycle campaigns.</p>
+            <p class="proj-desc">XM &amp; Exness needed Vietnamese retail trading volume — fast. Built a ground-up affiliate network by sourcing top Telegram &amp; Zalo community leaders, then structured volume-based performance deals with clear KPI tiers. <strong>Result:</strong> 1,000+ active traders acquired, $2M+ in trading volume generated across multiple campaign sprints.</p>
             <a href="#contact" class="proj-link">Learn More
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
             </a>
@@ -953,7 +1018,7 @@
         <div class="exp-sticky" id="js-exp-intro">
           <p class="eyebrow">Journey</p>
           <h2 class="section-title" id="exp-heading">Where I've<br><em>been.</em></h2>
-          <p>From investment consulting to crypto exchange growth — a career path shaped by relentless execution, strong relationships, and a passion for Web3 market expansion.</p>
+          <p>Every role sharpened the same edge: turning relationships into revenue. From investment consulting floors to crypto exchange war rooms to GameFi launch campaigns — here's how I got here.</p>
         </div>
 
         <ol class="timeline" id="js-timeline" aria-label="Work history">
@@ -963,7 +1028,7 @@
             <p class="tl-period">Jun 2025 — Present</p>
             <h3 class="tl-role">Business Development Executive</h3>
             <p class="tl-company">Spores Network</p>
-            <p class="tl-desc">Closed multiple marketing packages for diverse projects. Collaborated with MEXC, KuCoin, Bitget, Bitunix, Amnis Finance, Xenea, Kimani &amp; more. Planned exchange promotion strategies, drove trading volume &amp; TVL, managed affiliate partnerships, built pitchdecks and proposals, and hosted side events.</p>
+            <p class="tl-desc">Drove end-to-end BD for a Web3 marketing platform — closing promotional packages with MEXC, KuCoin, Bitget, Bitunix, Amnis Finance, Xenea &amp; Kimani. Architected exchange promotion strategies to grow TVL and trading volume, negotiated affiliate terms, produced pitch decks and go-to-market proposals, and represented the firm at ecosystem side events.</p>
             <ul class="tl-tags">
               <li class="tl-tag">Exchange BD</li><li class="tl-tag">KOL Partnerships</li>
               <li class="tl-tag">TVL Growth</li><li class="tl-tag">Affiliate Mgmt</li>
@@ -976,7 +1041,7 @@
             <p class="tl-period">Jan 2025 — Jun 2025</p>
             <h3 class="tl-role">Business Development &amp; Marketing</h3>
             <p class="tl-company">MetaWork</p>
-            <p class="tl-desc">Participated in building a mini app project on Telegram (BULL). Researched and identified suitable KOLs for project promotion. Developed marketing plans for product launch &amp; user growth, and sourced affiliates to promote Bybit and Binance platforms.</p>
+            <p class="tl-desc">Co-architected BULL — a Telegram Mini App built for the Web3 mobile-first generation. Owned end-to-end KOL scouting and vetting, engineered the product launch marketing plan, and closed affiliate partnerships with Bybit and Binance promoters — driving user acquisition from zero to initial traction within weeks of launch.</p>
             <ul class="tl-tags">
               <li class="tl-tag">Telegram Mini App</li><li class="tl-tag">KOL Research</li>
               <li class="tl-tag">Marketing Plans</li><li class="tl-tag">Affiliate BD</li>
@@ -988,7 +1053,7 @@
             <p class="tl-period">Oct 2023 — Apr 2025</p>
             <h3 class="tl-role">BD · Marketing · Community Manager</h3>
             <p class="tl-company">SOVIC Company</p>
-            <p class="tl-desc">Contributed to building Web3 projects including GameFi and AI Agent. Built media channels, generated content, wrote copy, and created Figma designs. Conducted KOL &amp; project research and developed go-to-market strategies — leading a campaign that brought 100K+ users and $50K+ revenue.</p>
+            <p class="tl-desc">Spearheaded BD &amp; community growth across Web3 GameFi and AI Agent projects. Built media channels, produced conversion-optimized content, and designed Figma campaign assets. Conducted deep KOL due diligence and orchestrated go-to-market strategy — culminating in a campaign that delivered 100,000+ new users and $50K+ in direct revenue.</p>
             <ul class="tl-tags">
               <li class="tl-tag">GameFi</li><li class="tl-tag">AI Agent</li>
               <li class="tl-tag">Go-to-Market</li><li class="tl-tag">100K+ Users</li>
@@ -1001,7 +1066,7 @@
             <p class="tl-period">Mar 2022 — Oct 2023</p>
             <h3 class="tl-role">Sales &amp; Sales Manager</h3>
             <p class="tl-company">Newsun</p>
-            <p class="tl-desc">Built and maintained partnerships with top Vietnamese trading communities on Telegram &amp; Zalo for XM and Exness. Managed and trained a sales team, worked with KOLs &amp; YouTubers for trading campaigns and livestreams. Structured volume-based deals delivering 1,000+ active users and $2M+ trading volume.</p>
+            <p class="tl-desc">Built a broker affiliate operation from the ground up — sourcing and scaling high-value Vietnamese trading communities on Telegram &amp; Zalo for XM and Exness. Recruited, trained &amp; managed a full sales team; activated KOL and YouTuber networks for live trading campaigns and stream events. Structured volume-based performance deals that produced 1,000+ retained active traders and $2M+ in documented trading volume.</p>
             <ul class="tl-tags">
               <li class="tl-tag">Sales Management</li><li class="tl-tag">Team Training</li>
               <li class="tl-tag">$2M+ Volume</li><li class="tl-tag">Community Mgmt</li>
@@ -1013,7 +1078,7 @@
             <p class="tl-period cyan">2014 — 2019</p>
             <h3 class="tl-role">B.A. Corporate Finance</h3>
             <p class="tl-company violet">Academy of Finance — Hà Nội</p>
-            <p class="tl-desc">Bachelor's Degree in Corporate Finance. Graduated with <em>Good</em> standing. Built a strong analytical foundation in financial markets, investment evaluation, and corporate strategy — the bedrock of my later career in trading &amp; Web3.</p>
+            <p class="tl-desc">Bachelor's Degree in Corporate Finance, graduated with <em>Good</em> standing. Built a rigorous analytical foundation in financial markets, investment evaluation, and corporate strategy — the bedrock that later powered deal structuring, affiliate KPI design, and volume-growth modeling across Web3 markets.</p>
             <ul class="tl-tags">
               <li class="tl-tag cyan">Education</li><li class="tl-tag">Corporate Finance</li>
               <li class="tl-tag">Investment Analysis</li>
@@ -1036,11 +1101,12 @@
         <div id="js-contact-info">
           <p class="eyebrow">Get In Touch</p>
           <h2 class="section-title" id="contact-heading">
-            Let's build<br>something<br><em>big.</em>
+            Let's move<br>volume<br><em>together.</em>
           </h2>
           <p class="contact-note">
-            Looking to grow exchange volume, launch a KOL campaign, or need a BD lead
-            who knows the Web3 market inside-out? Let's talk.
+            Need someone who can close exchange partnerships, architect a KOL campaign
+            with real ROI, or build the affiliate pipeline that actually converts volume
+            into revenue? I've done all three. Let's make it happen.
           </p>
 
           <a href="mailto:nguyenbakienhumg@gmail.com" class="contact-email">
@@ -1124,7 +1190,7 @@
   ============================================================ -->
   <footer>
     <p class="footer-logo">K<em>.</em>N</p>
-    <p>© 2025 Nguyen Ba Kien (Kelvin) — Building Web3 growth, one deal at a time.</p>
+    <p>© 2025 Nguyen Ba Kien (Kelvin) — Engineering Web3 growth, one deal at a time.</p>
     <a href="#hero" class="footer-top">Back to top ↑</a>
   </footer>
 
@@ -1202,14 +1268,14 @@
         if (p.y < 0) p.y = canvas.height; if (p.y > canvas.height) p.y = 0;
 
         ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0,212,255,${p.a * .7})`; ctx.fill();
+        ctx.fillStyle = `rgba(6,182,212,${p.a * .7})`; ctx.fill();
 
         for (let j = i + 1; j < pts.length; j++) {
           const q = pts[j];
           const d = Math.hypot(p.x - q.x, p.y - q.y);
           if (d < MAX_D) {
             ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(91,33,255,${(1 - d / MAX_D) * .18})`;
+            ctx.strokeStyle = `rgba(124,58,237,${(1 - d / MAX_D) * .18})`;
             ctx.lineWidth = .6; ctx.stroke();
           }
         }
@@ -1229,12 +1295,34 @@
     });
 
 
+    /* ── TYPEWRITER SETUP ───────────────────────────────── */
+    const heroSubEl  = $('.hero-sub');
+    const heroSubTxt = heroSubEl ? heroSubEl.textContent.trim() : '';
+    if (heroSubEl) heroSubEl.textContent = '';
+
+    function startTypewriter(el, text) {
+      let i = 0;
+      const cursor = document.createElement('span');
+      cursor.className = 'typer-cursor';
+      el.appendChild(cursor);
+      const id = setInterval(() => {
+        if (i < text.length) {
+          el.insertBefore(document.createTextNode(text[i++]), cursor);
+        } else {
+          clearInterval(id);
+          setTimeout(() => { cursor.style.animation = 'none'; cursor.style.opacity = '0'; }, 3500);
+        }
+      }, 44);
+    }
+
     /* ── HERO ENTRANCE ─────────────────────────────────── */
     gsap.timeline({ defaults: { ease: 'power4.out' } })
       .to('.name-inner', { y: 0, duration: 1.3, stagger: .18 })
       .to('.hero-eyebrow', { opacity: 1, y: 0, duration: .9 }, '-=.9')
-      .to('.hero-sub',     { opacity: 1, y: 0, duration: .9 }, '-=.75')
-      .to('.hero-bio',     { opacity: 1, y: 0, duration: .8 }, '-=.65')
+      .to('.hero-sub',     { opacity: 1, y: 0, duration: .4,
+          onComplete: () => { if (heroSubEl && heroSubTxt) startTypewriter(heroSubEl, heroSubTxt); }
+        }, '-=.75')
+      .to('.hero-bio',     { opacity: 1, y: 0, duration: .8 }, '-=.3')
       .to('.hero-btns',    { opacity: 1, y: 0, duration: .8 }, '-=.6')
       .to('.hero-stats',   { opacity: 1, x: 0, duration: .9, ease: 'power3.out' }, '-=.5');
 
@@ -1304,6 +1392,34 @@
     gsap.fromTo('#contactForm',
       { opacity: 0, x:  45 }, { opacity: 1, x: 0, duration: 1, ease: 'power3.out',
         scrollTrigger: { trigger: '#contactForm', ...tOpts } });
+
+
+    /* ── STAT COUNTERS ──────────────────────────────────── */
+    const statEls = $$('.stat-num[data-count]');
+    if (statEls.length && 'IntersectionObserver' in window) {
+      const cObs = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el    = entry.target;
+          const total = +el.dataset.count;
+          const pfx   = el.dataset.prefix || '';
+          const sfx   = el.dataset.suffix || '';
+          const emEl  = el.querySelector('em');
+          const dur   = 1400;
+          const t0    = performance.now();
+          if (emEl) emEl.textContent = sfx;
+          (function tick(now) {
+            const p   = Math.min((now - t0) / dur, 1);
+            const val = Math.round((1 - Math.pow(1 - p, 3)) * total);
+            const txt = el.childNodes[0];
+            if (txt && txt.nodeType === 3) txt.textContent = pfx + val;
+            if (p < 1) requestAnimationFrame(tick);
+          })(t0);
+          cObs.unobserve(el);
+        });
+      }, { threshold: 0.6 });
+      statEls.forEach(el => cObs.observe(el));
+    }
 
 
     /* ── MOBILE NAV ────────────────────────────────────── */
