@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kelvin Nguyen — Business Development Executive · Web3</title>
 
-  <!-- Google Fonts: Playfair Display + DM Sans -->
+  <!-- Google Fonts: Space Grotesk + Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -51,15 +51,16 @@
     body {
       background: var(--navy);
       color: var(--off-white);
-      font-family: var(--font-body);
+      font-family: 'Inter', sans-serif;
       font-weight: 400;
       line-height: 1.65;
       overflow-x: hidden;
       cursor: none;
     }
+    h1, h2, h3, h4, h5, h6 { font-family: 'Space Grotesk', sans-serif; }
+    p, nav, button, input, textarea, select { font-family: 'Inter', sans-serif; }
     a   { text-decoration: none; color: inherit; }
     img { display: block; max-width: 100%; }
-    button, input, textarea { font-family: inherit; }
 
     ::-webkit-scrollbar       { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--navy); }
@@ -115,7 +116,7 @@
       font-family: var(--font-display);
       font-size: 1.5rem; font-weight: 700; letter-spacing: -.02em;
     }
-    .nav-logo em { font-style: italic; color: var(--accent); }
+    .nav-logo em { font-style: normal; color: var(--accent); }
 
     .nav-list { list-style: none; display: flex; gap: 2.5rem; }
     .nav-list a {
@@ -263,7 +264,7 @@
       text-align: right; opacity: 0;
     }
     .stat-num   { font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; line-height: 1; }
-    .stat-num em { font-style: italic; color: var(--accent); }
+    .stat-num em { font-style: normal; color: var(--accent); }
     .stat-label { font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--off-white-60); }
 
     .scroll-cue {
@@ -575,7 +576,7 @@
       flex-wrap: wrap; gap: 1rem;
     }
     .footer-logo { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; }
-    .footer-logo em { font-style: italic; color: var(--accent); }
+    .footer-logo em { font-style: normal; color: var(--accent); }
     footer p { font-size: .8rem; color: var(--off-white-60); }
     .footer-top { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--violet-mid); transition: color .3s; }
     .footer-top:hover { color: var(--accent); }
